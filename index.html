@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Gallery</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;400;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ffafbd, #ffc3a0, #ffdde1);
+            background-size: 300% 300%;
+            animation: gradient 15s ease infinite;
+            font-family: 'Quicksand', sans-serif;
+            overflow: hidden;
+            position: relative;
+            transition: background 0.5s ease;
+        }
+
+        .glass-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px 60px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 5em;
+            background: linear-gradient(45deg, #ff6b6b, #fc5c7d, #6c5b7b);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.3);
+            margin-bottom: 30px;
+            letter-spacing: 2px;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn {
+            font-family: 'Quicksand', sans-serif;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #fc5c7d, #6c5b7b);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 5px 15px rgba(252, 92, 125, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .color-btn {
+            background: linear-gradient(45deg, #ff6b6b, #fc5c7d);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(252, 92, 125, 0.6);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: floatHeart linear forwards;
+            opacity: 0.6;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .subtitle {
+            color: rgb(3, 3, 3);
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            font-weight: 300;
+            opacity: 0.9;
+        }
+
+        .love-msg {
+            position: absolute;
+            bottom: 20px;
+            font-size: 0.9em;
+            color: white;
+            opacity: 0.8;
+            font-weight: 300;
+        }
+
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: white;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-transition"></div>
+    <div class="glass-container">
+        <h1>Welcome to Our Project Gallery</h1>
+        <p class="subtitle">Every moment with you is a fabulous moment my dear friends</i>...</p>
+        <div class="btn-container">
+            <button class="btn color-btn">Change Colors 🎨</button>
+            <button class="btn">Enter For Some Sample ✨</button>
+        </div>
+    </div>
+    <p class="love-msg">Made with love, for my pookie 💕</p>
+
+    <script>
+        const heartEmojis = ['💗', '💖', '💝', '💕', '♥️'];
+        const gradients = [
+            'linear-gradient(135deg, #ffafbd, #ffc3a0, #ffdde1)',
+            'linear-gradient(135deg, #e0c3fc, #8ec5fc, #c2e9fb)',
+            'linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4)',
+            'linear-gradient(135deg, #a18cd1, #fbc2eb, #fad0c4)',
+            'linear-gradient(135deg, #ffecd2, #fcb69f, #fad0c4)',
+        ];
+
+        let currentGradient = 0;
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 3 + 's';
+            heart.innerHTML = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+            document.body.appendChild(heart);
+
+            heart.addEventListener('animationend', () => {
+                heart.remove();
+            });
+        }
+
+        setInterval(createHeart, 600);
+
+        document.querySelector('.color-btn').addEventListener('click', () => {
+            currentGradient = (currentGradient + 1) % gradients.length;
+            document.body.style.background = gradients[currentGradient];
+        });
+
+        document.querySelector('.btn:not(.color-btn)').addEventListener('click', () => {
+            const transition = document.querySelector('.page-transition');
+            transition.style.opacity = '1';
+            setTimeout(() => {
+                window.location.href = 'gallery.html'; // Change 'gallery.html' to the actual path of your gallery page
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

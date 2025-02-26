@@ -1,4 +1,4 @@
-# 3D-Gallary-2.0
+# 3D Gallary 2.0
 A interactive 3D gallery built using HTML, CSS, and JavaScript.
 
 # Description
